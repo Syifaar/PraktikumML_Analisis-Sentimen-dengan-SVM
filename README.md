@@ -1,18 +1,12 @@
-# 📊 Sentiment Analysis with SVM (Support Vector Machine)
+# 📊 Laporan Latihan Sentiment Analysis with SVM (Support Vector Machine)
 
 ## 📝 Deskripsi
 Proyek ini merupakan implementasi analisis sentimen terhadap review teks menggunakan algoritma **Support Vector Machine (SVM)**. Dataset yang digunakan merupakan kumpulan review yang diklasifikasikan ke dalam sentimen positif (1) dan negatif (0).
 
 ---
-
 ## 📂 Dataset
 Dataset diunduh dari: [SI650 Winter 2011 - Kaggle](https://www.kaggle.com/c/si650winter11/data)  
-- Format: `.txt` (Tab-Separated)
 - Jumlah data: **6931 review**
-- Kolom:
-  - `liked`: Label (0 = Negatif, 1 = Positif)
-  - `text`: Review teks
-
 ---
 
 ## 🔄 Preprocessing
@@ -33,3 +27,25 @@ pipeline_svm = Pipeline([
     ('tfidf', TfidfTransformer()),
     ('classifier', SVC()),
 ])
+
+```
+Model diuji dengan menggunakan GridSearchCV dan StratifiedKFold Cross-Validation.
+
+## 🎯 Hyperparameter yang diuji:
+Kernel: linear, rbf
+C: 1, 10, 100, 1000
+Gamma (untuk rbf): 0.001, 0.0001
+
+## Hasil Evaluasi
+Akurasi: 99%
+Metode terbaik: SVM dengan kernel RBF, C=1000, gamma=0.001
+
+## 🧪 Contoh Prediksi
+```
+classifier.predict(["the vinci code is awesome"])  # Output: 1 (positif)
+classifier.predict(["the vinci code is bad"])      # Output: 0 (negatif)
+```
+
+## 📌 Kesimpulan
+Model SVM terbukti sangat efektif dalam mengklasifikasi sentimen review teks. Dengan preprocessing yang tepat dan pemilihan parameter terbaik, model mampu mencapai akurasi sangat tinggi.
+
